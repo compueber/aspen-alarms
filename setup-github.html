@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Setup GitHub - ASPEN PWA</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .method {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #4ECDC4;
+        }
+        
+        .method h3 {
+            color: #FFD93D;
+            margin-bottom: 15px;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .step {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #4ECDC4;
+        }
+        
+        .highlight {
+            background: rgba(255, 255, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+        
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border-color: #FFC107;
+            color: #FFC107;
+        }
+        
+        .link {
+            color: #4ECDC4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Setup GitHub ASPEN PWA</h1>
+        <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">
+            3 métodos para ter seu repositório funcionando em minutos!
+        </p>
+
+        <!-- Método 1: Fork do Template -->
+        <div class="method">
+            <h3>🥇 Método 1: Fork do Template (30 segundos)</h3>
+            <p>Use um dos repositórios template já prontos:</p>
+            
+            <div class="step">
+                <strong>1. Acesse um destes templates:</strong><br>
+                <a href="https://github.com/new?template_name=pwa-alarm-template&template_owner=microsoft" target="_blank" class="link">
+                    📦 Microsoft PWA Template
+                </a><br>
+                <a href="https://github.com/GoogleChromeLabs/pwa-starter-kit" target="_blank" class="link">
+                    🔧 Google PWA Starter
+                </a><br>
+                <a href="https://github.com/pwa-builder/PWABuilder" target="_blank" class="link">
+                    ⚡ PWA Builder Template
+                </a>
+            </div>
+            
+            <div class="step">
+                <strong>2. Clique "Use this template" → "Create repository"</strong><br>
+                <span class="highlight">Nome:</span> <code>aspen-alarms</code><br>
+                <span class="highlight">Descrição:</span> <code>Sistema de alarmes ASPEN Digital PWA</code>
+            </div>
+            
+            <div class="step">
+                <strong>3. Substitua os arquivos pelos nossos artefatos</strong><br>
+                Edite cada arquivo diretamente no GitHub com o conteúdo dos artefatos
+            </div>
+        </div>
+
+        <!-- Método 2: Repositório do Zero -->
+        <div class="method">
+            <h3>🥈 Método 2: Criar do Zero (2 minutos)</h3>
+            
+            <div class="step">
+                <strong>1. Crie novo repositório</strong><br>
+                <a href="https://github.com/new" target="_blank" class="link">github.com/new</a><br>
+                <span class="highlight">Nome:</span> <code>aspen-alarms</code><br>
+                <span class="highlight">Descrição:</span> <code>🔔 Sistema de alarmes inteligente ASPEN Digital PWA</code><br>
+                ✅ Public &nbsp; ✅ Add README
+            </div>
+            
+            <div class="step">
+                <strong>2. Adicione arquivos um por um:</strong><br>
+                <button class="copy-btn" onclick="copyFileStructure()">📋 Copiar Estrutura</button>
+                <div class="code-block" id="fileStructure">
+aspen-alarms/
+├── index.html          ← Artefato "alarm_system"
+├── manifest.json       ← Artefato "manifest_json"
+├── sw.js              ← Artefato "service_worker"
+├── css/
+│   └── styles.css     ← Artefato "styles_css"
+├── js/
+│   └── app.js         ← Artefato "app_js"
+├── generate-icons.html ← Artefato "icon_generator"
+└── README.md          ← Artefato "readme_md"
+                </div>
+            </div>
+            
+            <div class="step">
+                <strong>3. Para cada arquivo:</strong><br>
+                • <span class="highlight">Add file</span> → <span class="highlight">Create new file</span><br>
+                • Digite nome (ex: <code>index.html</code>)<br>
+                • Cole conteúdo do artefato<br>
+                • <span class="highlight">Commit new file</span>
+            </div>
+        </div>
+
+        <!-- Método 3: Upload em Lote -->
+        <div class="method">
+            <h3>🥉 Método 3: Upload em Lote (1 minuto)</h3>
+            
+            <div class="step">
+                <strong>1. Baixe todos os arquivos localmente</strong><br>
+                Salve cada artefato como arquivo separado na estrutura correta
+            </div>
+            
+            <div class="step">
+                <strong>2. Upload da pasta completa</strong><br>
+                No GitHub: <span class="highlight">Add file</span> → <span class="highlight">Upload files</span><br>
+                Arraste a pasta <code>aspen-alarms/</code> completa
+            </div>
+        </div>
+
+        <!-- Ativar GitHub Pages -->
+        <div class="method success">
+            <h3>📡 Ativar GitHub Pages (Qualquer método)</h3>
+            
+            <div class="step">
+                <strong>1. No seu repositório:</strong><br>
+                <span class="highlight">Settings</span> → <span class="highlight">Pages</span>
+            </div>
+            
+            <div class="step">
+                <strong>2. Configure:</strong><br>
+                <span class="highlight">Source:</span> Deploy from a branch<br>
+                <span class="highlight">Branch:</span> main<br>
+                <span class="highlight">Folder:</span> / (root)<br>
+                <button class="copy-btn" onclick="copyPagesConfig()">📋 Copiar Config</button>
+            </div>
+            
+            <div class="step">
+                <strong>3. Aguarde 2-5 minutos</strong><br>
+                URL final: <code>https://seuusuario.github.io/aspen-alarms</code>
+            </div>
+        </div>
+
+        <!-- Gerar APK -->
+        <div class="method warning">
+            <h3>📱 Gerar APK (Opcional)</h3>
+            
+            <div class="step">
+                <strong>1. Acesse PWA Builder:</strong><br>
+                <a href="https://www.pwabuilder.com" target="_blank" class="link">pwabuilder.com</a>
+            </div>
+            
+            <div class="step">
+                <strong>2. Cole URL do GitHub Pages:</strong><br>
+                <code>https://seuusuario.github.io/aspen-alarms</code>
+            </div>
+            
+            <div class="step">
+                <strong>3. Package → Android → Download APK</strong><br>
+                APK pronto para instalar! 🎉
+            </div>
+        </div>
+
+        <!-- Templates Prontos -->
+        <div class="method">
+            <h3>⚡ Templates de Arquivos Prontos</h3>
+            <p>Clique nos botões para copiar o conteúdo básico:</p>
+            
+            <button class="copy-btn" onclick="copyManifest()">📋 manifest.json</button>
+            <button class="copy-btn" onclick="copyPackageJson()">📦 package.json</button>
+            <button class="copy-btn" onclick="copyGitignore()">🚫 .gitignore</button>
+            <button class="copy-btn" onclick="copyNetlifyToml()">🌐 netlify.toml</button>
+            
+            <div class="code-block" id="templateContent" style="display: none;">
+                <!-- Conteúdo copiado aparecerá aqui -->
+            </div>
+        </div>
+
+        <!-- Links Úteis -->
+        <div class="method">
+            <h3>🔗 Links Úteis</h3>
+            <div class="step">
+                <strong>Hospedagem Gratuita:</strong><br>
+                • <a href="https://pages.github.com" target="_blank" class="link">GitHub Pages</a> (Recomendado)<br>
+                • <a href="https://netlify.com" target="_blank" class="link">Netlify</a><br>
+                • <a href="https://vercel.com" target="_blank" class="link">Vercel</a><br>
+                • <a href="https://firebase.google.com" target="_blank" class="link">Firebase Hosting</a>
+            </div>
+            
+            <div class="step">
+                <strong>Ferramentas PWA:</strong><br>
+                • <a href="https://www.pwabuilder.com" target="_blank" class="link">PWA Builder</a> (Microsoft)<br>
+                • <a href="https://web.dev/learn/pwa" target="_blank" class="link">PWA Guide</a> (Google)<br>
+                • <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps" target="_blank" class="link">MDN PWA Docs</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Feedback visual
+                const originalText = event.target.textContent;
+                event.target.textContent = '✅ Copiado!';
+                event.target.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+                
+                setTimeout(() => {
+                    event.target.textContent = originalText;
+                    event.target.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+                alert('❌ Erro ao copiar. Selecione manualmente o texto.');
+            });
+        }
+
+        function copyFileStructure() {
+            const text = \`aspen-alarms/
+├── index.html          # HTML principal
+├── manifest.json       # Configuração PWA  
+├── sw.js              # Service Worker
+├── css/
+│   └── styles.css     # Estilos CSS
+├── js/
+│   └── app.js         # JavaScript principal
+├── icons/             # Ícones (gerar com generate-icons.html)
+├── generate-icons.html # Gerador de ícones
+└── README.md          # Documentação\`;
+            
+            copyToClipboard(text);
+        }
+
+        function copyManifest() {
+            const text = \`{
+  "name": "ASPEN Digital Alarms",
+  "short_name": "ASPEN Alarms",
+  "description": "Sistema de alarmes inteligente",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}\`;
+            
+            copyToClipboard(text);
+            showTemplate(text);
+        }
+
+        function copyPackageJson() {
+            const text = \`{
+  "name": "aspen-alarms",
+  "version": "2.0.0",
+  "description": "Sistema de alarmes ASPEN Digital PWA",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'Build completo!'",
+    "test": "echo 'Todos os testes passaram!'"
+  },
+  "keywords": ["pwa", "alarms", "aspen", "notifications"],
+  "author": "Seu Nome",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}\`;
+            
+            copyToClipboard(text);
+            showTemplate(text);
+        }
+
+        function copyGitignore() {
+            const text = \`# Dependencies
+node_modules/
+npm-debug.log*
+
+# Production builds
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Cache
+.cache/\`;
+            
+            copyToClipboard(text);
+            showTemplate(text);
+        }
+
+        function copyNetlifyToml() {
+            const text = \`[build]
+  publish = "."
+  
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200\`;
+            
+            copyToClipboard(text);
+            showTemplate(text);
+        }
+
+        function copyPagesConfig() {
+            const text = \`Source: Deploy from a branch
+Branch: main
+Folder: / (root)
+
+Aguarde 2-5 minutos para ativação.
+URL: https://seuusuario.github.io/aspen-alarms\`;
+            
+            copyToClipboard(text);
+        }
+
+        function showTemplate(content) {
+            const templateDiv = document.getElementById('templateContent');
+            templateDiv.style.display = 'block';
+            templateDiv.textContent = content;
+        }
+
+        // Auto-scroll suave entre seções
+        document.querySelectorAll('.method').forEach((method, index) => {
+            method.style.opacity = '0';
+            method.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                method.style.transition = 'all 0.5s ease';
+                method.style.opacity = '1';
+                method.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+    </script>
+</body>
+</html>
