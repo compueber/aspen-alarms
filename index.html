@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASPEN Digital Alarms</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ASPEN Alarms">
+    <meta name="description" content="Sistema de alarmes inteligente para horários ASPEN Digital">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="js/app.js" as="script">
+    <link rel="preload" href="sounds/alarm.mp3" as="audio">
+</head>
+<body>
+    <!-- Indicador de conectividade -->
+    <div class="offline-indicator" id="connectionStatus">
+        📶 Online
+    </div>
+
+    <div class="container">
+        <!-- Prompt de instalação PWA -->
+        <div class="install-prompt" id="installPrompt">
+            <strong>📱 Instalar como App</strong>
+            <p>Adicione à tela inicial para melhor experiência!</p>
+            <button onclick="installPWA()">Instalar Agora</button>
+            <button onclick="dismissInstall()" style="margin-left: 10px; background: rgba(0,0,0,0.2);">Agora Não</button>
+        </div>
+
+        <h1>🔔 ASPEN Digital</h1>
+        <div class="app-info">Sistema de Alarmes Inteligente v2.0 PWA</div>
+        
+        <div class="status-panel">
+            <div class="current-time" id="currentTime">00:00:00</div>
+            <div class="next-alarm" id="nextAlarm">Próximo alarme: --:--</div>
+            <div class="system-status status-inactive" id="systemStatus">
+                ⏹️ Sistema Parado
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="startBtn" onclick="startAlarms()">
+                ▶️ Iniciar
+            </button>
+            <button id="stopBtn" onclick="stopAlarms()" class="disabled">
+                ⏹️ Parar
+            </button>
+            <button onclick="testAlarm()">
+                🔊 Testar
+            </button>
+            <button onclick="requestNotificationPermission()">
+                🔔 Notificações
+            </button>
+        </div>
+
+        <div class="volume-control">
+            <label>🔊 Volume: </label>
+            <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+            <span id="volumeValue">70%</span>
+        </div>
+
+        <div class="alarms-list">
+            <div class="alarm-block">
+                <div class="block-title">📍 Alarme Isolado</div>
+                <div class="alarm-times">
+                    <div class="alarm-time" data-time="08:30">08:30</div>
+                </div>
+            </div>
+
+            <div class="alarm-block">
+                <div class="block-title">🟢 Bloco 1 (Manhã)</div>
+                <div class="alarm-times">
+                    <div class="alarm-time" data-time="09:50">09:50</div>
+                    <div class="alarm-time" data-time="10:10">10:10</div>
+                    <div class="alarm-time" data-time="10:30">10:30</div>
+                    <div class="alarm-time" data-time="10:50">10:50</div>
+                </div>
+            </div>
+
+            <div class="alarm-block">
+                <div class="block-title">🟡 Bloco 2 (Almoço)</div>
+                <div class="alarm-times">
+                    <div class="alarm-time" data-time="12:10">12:10</div>
+                    <div class="alarm-time" data-time="12:30">12:30</div>
+                    <div class="alarm-time" data-time="12:50">12:50</div>
+                    <div class="alarm-time" data-time="13:10">13:10</div>
+                </div>
+            </div>
+
+            <div class="alarm-block">
+                <div class="block-title">🔵 Bloco 3 (Tarde)</div>
+                <div class="alarm-times">
+                    <div class="alarm-time" data-time="14:30">14:30</div>
+                    <div class="alarm-time" data-time="14:50">14:50</div>
+                    <div class="alarm-time" data-time="15:10">15:10</div>
+                    <div class="alarm-time" data-time="15:30">15:30</div>
+                </div>
+            </div>
+
+            <div class="alarm-block">
+                <div class="block-title">🟠 Bloco 4 (Fim da Tarde)</div>
+                <div class="alarm-times">
+                    <div class="alarm-time" data-time="16:50">16:50</div>
+                    <div class="alarm-time" data-time="17:10">17:10</div>
+                    <div class="alarm-time" data-time="17:30">17:30</div>
+                    <div class="alarm-time" data-time="17:50">17:50</div>
+                </div>
+            </div>
+
+            <div class="alarm-block">
+                <div class="block-title">🔴 Bloco 5 (Noite)</div>
+                <div class="alarm-times">
+                    <div class="alarm-time" data-time="19:10">19:10</div>
+                    <div class="alarm-time" data-time="19:30">19:30</div>
+                    <div class="alarm-time" data-time="19:50">19:50</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Alerta -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <h2>⏰ ALARME!</h2>
+            <p id="alarmMessage">Hora do seu compromisso!</p>
+            <button onclick="closePopup()">✅ OK, Entendi!</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
